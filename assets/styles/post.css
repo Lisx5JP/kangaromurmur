@@ -1,0 +1,198 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 12px;
+  font-family: "Source Han Serif CN", Georgia, serif;
+}
+
+.content {
+  display: block;
+  margin-left: 420px;
+  max-width: 520px;
+  padding-bottom: 64px;
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
+
+h1 {
+  margin-bottom: 48px;
+}
+
+h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  opacity: 0.8;
+  text-align: center;
+}
+
+h3 {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 24px;
+  margin-top: 48px;
+}
+
+#home {
+  opacity: 0.6;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 52px;
+  background-color: lightyellow;
+  display: inline-block;
+  margin-bottom: 8px;
+  transform: rotate(-1deg);
+}
+
+#home a {
+  color: black;
+  text-decoration: none;
+}
+
+#title {
+  opacity: 0.8;
+  font-size: 21px;
+  display: inline-block;
+}
+
+p {
+  line-height: 24px;
+  margin-bottom: 28px;
+}
+
+time {
+  font-size: 14px;
+  font-style: italic;
+  line-height: 36px;
+}
+
+a {
+  color: #1b75d0;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #1b75d0;
+}
+
+pre {
+  border: 1px solid lightgrey;
+  white-space: pre-wrap;
+  margin: 8px 0;
+  padding: 6px;
+  border-radius: 4px;
+  opacity: 0.9;
+  max-width: 560px;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+code {
+  border: 1px solid lightgray;
+  padding: 1px 2px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.01);
+  opacity: 0.9;
+  font-size: 12px;
+  font-family: Consolas, monospace;
+}
+
+pre code {
+  border: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  padding-left: 18px;
+  margin: 4px 0 16px 0;
+}
+
+blockquote {
+  border-left: 4px solid lightgrey;
+  padding-left: 8px;
+  margin: 12px 0 12px 12px;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+em {
+  opacity: 0.8;
+}
+
+.iframe-wrapper {
+  width: 600px;
+  margin: 8px 0;
+}
+
+.iframe {
+  position: relative;
+  padding: 30% 45%;
+  border: 1px solid lightgrey;
+}
+
+.iframe iframe {
+  border: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+/* generate github readme like table sytles */
+/* GitHub-like Markdown Table Styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 1px solid #d0d7de;
+}
+
+table th {
+  font-weight: 600;
+  background-color: #f6f8fa;
+}
+
+table tr:nth-child(even) {
+  background-color: #f6f8fa;
+}
+
+/* Optional: Add a bit more styling to match GitHub's look */
+table thead th {
+  vertical-align: bottom;
+}
+
+table tbody td {
+  vertical-align: top;
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table tbody tr:last-child {
+  border-bottom: 1px solid #d0d7de;
+}

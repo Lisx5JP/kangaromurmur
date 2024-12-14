@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/styles/post.css" rel="stylesheet">
+  <style>
+    #app {
+      margin-bottom: 8rem;
+    }
+
+    .btns {
+      button {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0 0.5rem;
+        border-radius: 0;
+        border-width: 2px;
+        border-color: transparent lightgray lightgray transparent;
+        background-color: #e5e5e5;
+      }
+    }
+
+    .selected {
+      background-color: lightyellow;
+    }
+  </style>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <link rel="shortcut icon" href="/assets/imgs/favicon.svg" />
+  <title>kangaroo murmur</title>
+</head>
+
+<body>
+  <h1 id="title">events archive</h1>
+  
+  <p><a class="back" href="/index.html">< back</a></p>
+
+  <div id="app">
+    <div class="btns">
+      <span>默认：</span>
+      <button @click="setFilter('')">全部</button>
+    </div>
+
+    <div class="btns" style="margin-top: 1rem;">
+      <span>筛选城市：</span>
+      <button v-for="item in citiesList" :key="item" @click="setFilter('c', item)">
+        {{ item }}
+      </button>
+    </div>
+
+    <div class="btns" style="margin-top: 1rem;">
+      <span>筛选系列：</span>
+      <button v-for="item in seriesList" :key="item" @click="setFilter('s', item)">
+        {{ item }}
+      </button>
+    </div>
+
+    <p style="margin-top: 1rem;">
+      当前数目：<span style="color: green;">
+        {{ filteredData.length }}
+      </span>
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th v-for="header in headers" :key="header">{{ header }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in filteredData" :key="item.name">
+          <td>{{ item.date }}</td>
+          <td>{{ item.venue }}</td>
+          <td><a :href="item.link" target="_blank">{{ item.name }}</a></td>
+          <td v-if="item.permalink">
+            <a :href="item.permalink" target="_blank">Permalink 🡥</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+<script>
+  const { createApp, ref, onMounted, computed } = Vue
+
+  createApp({
+    setup() {
+      const headers = ['日期', '场地', '演出', '永久链接'];
+      const data = ref([]);
+      const seriesList = ref([]);
+      const citiesList = ref([]);
+      const currentFilter = ref({ type: '', name: '' });
+
+      function sortEventsByDate(events) {
+        return events.sort((a, b) => {
+          const dateA = new Date(a.date.split(' ')[0]);
+          const dateB = new Date(b.date.split(' ')[0]);
+
+          return dateB - dateA;
+        });
+      }
+
+      onMounted(async () => {
+        const resBaseInfo = await fetch('./data.json');
+        const baseInfo = await resBaseInfo.json();
+        seriesList.value = baseInfo.series;
+        citiesList.value = baseInfo.cities;
+
+        const resList = await fetch('https://opensheet.elk.sh/1H5MJFM7E4Vdt5Mq18aOHvtUG14vre_03KMkqXXNqOIE/list');
+        const listData = await resList.json();
+        data.value = sortEventsByDate((listData));
+      });
+
+      const filteredData = computed(() => {
+        if (!currentFilter.value.name) {
+          return data.value;
+        }
+        if (currentFilter.value.type === 's')
+          return data.value.filter(item => item.name.includes(currentFilter.value.name) || item.series === currentFilter.value.name);
+        else if (currentFilter.value.type === 'c')
+          return data.value.filter(item => item.city === currentFilter.value.name);
+      });
+
+      const setFilter = (type, name) => {
+        currentFilter.value = { type, name };
+        const buttons = document.querySelectorAll('.btns button');
+
+        buttons.forEach(button => {
+          if (button.textContent === name) {
+            button.classList.add('selected');
+          } else {
+            button.classList.remove('selected');
+          }
+        });
+      };
+
+      return {
+        headers,
+        filteredData,
+        seriesList,
+        citiesList,
+        setFilter
+      }
+    }
+  }).mount('#app')
+</script>
+
+</html>
