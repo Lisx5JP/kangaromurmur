@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kangaroo murmur</title>
+  <script src="https://cdn.jsdelivr.net/npm/bigger-picture@1.1.19/dist/bigger-picture.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bigger-picture@1.1.19/dist/bigger-picture.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+  <link rel="shortcut icon" href="/assets/imgs/favicon.svg" />
+  <style>
+    body {
+      /* max-width: 1280px; */
+      background-color: darkgreen;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="images"></div>
+</body>
+
+<script>
+  const imageFolder = "../assets/imgs/poster/";
+  const thumbFolder = "../assets/imgs/poster/thumb/";
+
+  // Fetch image data from the external JSON file
+  fetch('./posters.json')
+    .then(response => {
+      if (!response.ok) throw new Error("Failed to load JSON");
+      return response.json();
+    })
+    .then(images => {
+      const imagesContainer = document.getElementById("images");
+
+      images.forEach(image => {
+        const anchor = document.createElement("a");
+        anchor.href = `${imageFolder}${image.fileName}`;
+        anchor.dataset.img = `${imageFolder}${image.fileName}`;
+        anchor.dataset.thumb = `${thumbFolder}${image.fileName}`;
+        anchor.dataset.alt = image.fileName.split('.')[0];
+        anchor.dataset.width = image.width;
+        anchor.dataset.height = image.height;
+
+        const img = document.createElement("img");
+        img.src = `${thumbFolder}${image.fileName}`;
+        img.alt = image.fileName.split('.')[0];
+
+        anchor.appendChild(img);
+        imagesContainer.appendChild(anchor);
+      });
+
+      // Initialize BiggerPicture
+      const bp = BiggerPicture({
+        target: document.body,
+        scale: 0.1,
+      });
+
+      // Add click listener for BiggerPicture
+      const imageLinks = document.querySelectorAll("#images > a");
+      imageLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          bp.open({
+            items: imageLinks,
+            el: e.currentTarget,
+          });
+        });
+      });
+
+
+      // a masonry layout
+      Macy({
+        container: "#images",
+        trueOrder: true,
+        margin: 12,
+        columns: 13,
+      });
+    })
+    .catch(error => console.error("Error loading images:", error));
+</script>
+
+</html>

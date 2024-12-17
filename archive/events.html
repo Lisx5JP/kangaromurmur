@@ -104,7 +104,7 @@
       }
 
       onMounted(async () => {
-        const resBaseInfo = await fetch('./data.json');
+        const resBaseInfo = await fetch('./events.json');
         const baseInfo = await resBaseInfo.json();
         seriesList.value = baseInfo.series;
         citiesList.value = baseInfo.cities;
