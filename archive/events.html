@@ -9,22 +9,29 @@
   <style>
     #app {
       margin-bottom: 8rem;
+      max-width: 1180px;
     }
 
     .btns {
       button {
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
-        padding: 0 0.5rem;
-        border-radius: 0;
-        border-width: 2px;
-        border-color: transparent lightgray lightgray transparent;
-        background-color: #e5e5e5;
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        border-color: transparent;
       }
     }
 
     .selected {
       background-color: lightyellow;
+    }
+
+    .murmur {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      width: 100px;
+      rotate: -15deg;
     }
   </style>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -34,8 +41,12 @@
 
 <body>
   <h1 id="title">events archive</h1>
-  
-  <p><a class="back" href="/index.html">< back</a></p>
+
+  <p><a class="back" href="/index.html">
+      < back</a>
+  </p>
+
+  <img src="../assets/imgs/murmur.png" alt="kangaroo murmur" class="murmur" />
 
   <div id="app">
     <div class="btns">
@@ -52,7 +63,8 @@
 
     <div class="btns" style="margin-top: 1rem;">
       <span>筛选系列：</span>
-      <button v-for="item in seriesList" :key="item" @click="setFilter('s', item)">
+      <button v-for="item in seriesList" :key="item" @click="setFilter('s', item)"
+        :style="{ backgroundColor: getRandomColor() }">
         {{ item }}
       </button>
     </div>
@@ -71,11 +83,13 @@
       </thead>
       <tbody>
         <tr v-for="item in filteredData" :key="item.name">
-          <td>{{ item.date }}</td>
+          <td style="opacity: 0.7;">{{ item.date }}</td>
           <td>{{ item.venue }}</td>
-          <td><a :href="item.link" target="_blank">{{ item.name }}</a></td>
-          <td v-if="item.permalink">
-            <a :href="item.permalink" target="_blank">Permalink 🡥</a>
+          <td style="font-size: 0.875rem;">
+            <a :href="item.link" target="_blank">{{ item.name }}</a>
+          </td>
+          <td v-if="item.permalink" style="font-family: 'Consolas', monospace;">
+            <a :href="item.permalink" target="_blank">Permalink🡥</a>
           </td>
         </tr>
       </tbody>
@@ -88,7 +102,7 @@
 
   createApp({
     setup() {
-      const headers = ['日期', '场地', '演出', '永久链接'];
+      const headers = ['日期⏲️', '场地🚪', '演出🎭', '永久链接🔗'];
       const data = ref([]);
       const seriesList = ref([]);
       const citiesList = ref([]);
@@ -101,6 +115,13 @@
 
           return dateB - dateA;
         });
+      }
+
+      function getRandomColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgba(${r}, ${g}, ${b}, 0.8)`; // Opacity is set to 0.8
       }
 
       onMounted(async () => {
@@ -142,7 +163,8 @@
         filteredData,
         seriesList,
         citiesList,
-        setFilter
+        setFilter,
+        getRandomColor
       }
     }
   }).mount('#app')
