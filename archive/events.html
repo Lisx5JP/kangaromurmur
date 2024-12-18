@@ -89,7 +89,7 @@
             <a :href="item.link" target="_blank">{{ item.name }}</a>
           </td>
           <td v-if="item.permalink" style="font-family: 'Consolas', monospace;">
-            <a :href="item.permalink" target="_blank">Permalink🡥</a>
+            <a :href="item.permalink" target="_blank">Permalink ⤴</a>
           </td>
         </tr>
       </tbody>
@@ -102,7 +102,7 @@
 
   createApp({
     setup() {
-      const headers = ['日期⏲️', '场地🚪', '演出🎭', '永久链接🔗'];
+      const headers = ['日期 ⏲️', '场地 🚪', '演出 🎭', '永久链接 🔗'];
       const data = ref([]);
       const seriesList = ref([]);
       const citiesList = ref([]);

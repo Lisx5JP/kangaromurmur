@@ -14,6 +14,11 @@
       /* max-width: 1280px; */
       background-color: darkgreen;
     }
+
+    #images {
+      visibility: hidden;
+      /* Hide until layout is stable */
+    }
   </style>
 </head>
 
@@ -34,6 +39,20 @@
     })
     .then(images => {
       const imagesContainer = document.getElementById("images");
+
+      Promise.all(
+        images.map(image => {
+          return new Promise(resolve => {
+            const img = new Image();
+            img.src = `${thumbFolder}${image.fileName}`;
+            img.onload = resolve;
+            img.onerror = resolve; // Resolve even if an image fails to load
+          });
+        })
+      ).then(() => {
+        // Once all images are loaded, show the container
+        imagesContainer.style.visibility = "visible";
+      });
 
       images.forEach(image => {
         const anchor = document.createElement("a");
