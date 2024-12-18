@@ -83,9 +83,9 @@
       </thead>
       <tbody>
         <tr v-for="item in filteredData" :key="item.name">
-          <td style="opacity: 0.7;">{{ item.date }}</td>
+          <td>{{ item.date }}</td>
           <td>{{ item.venue }}</td>
-          <td style="font-size: 0.875rem;">
+          <td>
             <a :href="item.link" target="_blank">{{ item.name }}</a>
           </td>
           <td v-if="item.permalink" style="font-family: 'Consolas', monospace;">
@@ -121,7 +121,7 @@
         const r = Math.floor(Math.random() * 256);
         const g = Math.floor(Math.random() * 256);
         const b = Math.floor(Math.random() * 256);
-        return `rgba(${r}, ${g}, ${b}, 0.8)`; // Opacity is set to 0.8
+        return `rgba(${r}, ${g}, ${b}, 0.15)`; // Opacity is set to 0.8
       }
 
       onMounted(async () => {

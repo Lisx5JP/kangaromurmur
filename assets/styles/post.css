@@ -79,12 +79,12 @@ time {
 }
 
 a {
-  color: #1b75d0;
+  color: #6a7b8d;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #1b75d0;
+  color: #6a7b8d;
 }
 
 pre {
@@ -161,28 +161,27 @@ table {
   width: 100%;
   margin-top: 16px;
   margin-bottom: 16px;
-  font-size: 16px;
+  /* font-size: 16px; */
   line-height: 1.5;
 }
 
 table th,
 table td {
   padding: 6px 13px;
-  border: 1px solid #d0d7de;
+  border: 1px solid #e3eaf1;
+  color: #6a7b8d;
+  font-size: 0.875rem;
 }
 
 table th {
   font-weight: 600;
-  background-color: #f6f8fa;
-}
-
-table tr:nth-child(even) {
-  background-color: #f6f8fa;
+  font-size: 1rem;
 }
 
 /* Optional: Add a bit more styling to match GitHub's look */
 table thead th {
-  vertical-align: bottom;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 table tbody td {

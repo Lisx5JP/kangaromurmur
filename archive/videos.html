@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kangaroo murmur</title>
+  <script src="https://cdn.jsdelivr.net/npm/bigger-picture@1.1.19/dist/bigger-picture.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bigger-picture@1.1.19/dist/bigger-picture.min.css">
+  <link rel="shortcut icon" href="/assets/imgs/favicon.svg" />
+  <style>
+    body {
+      background-color: black;
+      --mask-offset: 140px;
+      mask: linear-gradient(to bottom, transparent, #fff var(--mask-offset) calc(100% - var(--mask-offset)), transparent), linear-gradient(to right, transparent, #fff var(--mask-offset) calc(100% - var(--mask-offset)), transparent);
+      mask-composite: intersect;
+      /* background-size: 32px 32px; */
+      /* background-image: radial-gradient(#ffffff22 1px, transparent 0); */
+      padding: 2rem 0;
+    }
+
+    #videos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      gap: 1.25rem;
+      z-index: 99;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="videos"></div>
+</body>
+
+<script>
+  fetch('./videos.json')
+    .then(response => {
+      if (!response.ok) throw new Error("Failed to load JSON");
+      return response.json();
+    })
+    .then(videos => {
+      const videosContainer = document.getElementById("videos");
+
+      videos.forEach(video => {
+        const videoKey = video.link.split('v=')[1];
+        const thumbLink = `https://img.youtube.com/vi/${videoKey}/mqdefault.jpg`;
+        const iframeLink = `https://www.youtube.com/embed/${videoKey}?autoplay=1&playsinline=1`;
+
+        const anchor = document.createElement("a");
+        anchor.href = video.link;
+        anchor.dataset.width = "1280";
+        anchor.dataset.height = "720";
+        anchor.dataset.thumb = thumbLink;
+
+        console.log('iframeLink', iframeLink);
+        anchor.dataset.iframe = iframeLink;
+
+        const img = document.createElement("img");
+        img.src = thumbLink;
+        img.alt = videoKey;
+        img.width = "256";
+        img.height = "144";
+
+        anchor.appendChild(img);
+        videosContainer.appendChild(anchor);
+      });
+
+      // Initialize BiggerPicture
+      const bp = BiggerPicture({
+        target: document.body,
+        scale: 0.1,
+      });
+
+      // Add click listener for BiggerPicture
+      const videoLinks = document.querySelectorAll("#videos > a");
+      videoLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          bp.open({
+            items: videoLinks,
+            el: e.currentTarget,
+          });
+        });
+      });
+    })
+    .catch(error => console.error("Error loading images:", error));
+</script>
+
+</html>
