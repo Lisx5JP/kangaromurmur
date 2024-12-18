@@ -33,12 +33,15 @@
 
     ul li {
       display: inline;
-      margin: 8px 0;
-      padding: 6px 8px;
       color: #6a7b8d;
     }
 
-    ul li:hover {
+    ul li a span {
+      display: inline-block;
+      padding: 6px 8px;
+    }
+
+    ul li a span:hover {
       background-color: rgb(252, 252, 120);
     }
 
@@ -54,7 +57,7 @@
     .footer {
       position: absolute;
       bottom: 1.5rem;
-      opacity: 0.8;
+      opacity: 0.7;
       line-height: 1;
       font-size: 1rem;
       margin: 0;
@@ -76,9 +79,9 @@
   <img id="murmur" src="/assets/imgs/murmur.png" />
 
   <ul>
-    <li>[<a href="./archive/videos.html">videos archive</a>]</li>
-    <li>[<a href="./archive/events.html">events archive</a>]</li>
-    <li>[<a href="./archive/posters.html">posters archive</a>]</li>
+    <li>[<a href="./archive/videos.html"><span>videos archive</span></a>]</li>
+    <li>[<a href="./archive/events.html"><span>events archive</span></a>]</li>
+    <li>[<a href="./archive/posters.html"><span>posters archive</span></a>]</li>
   </ul>
 
   <p class="footer">- kangaroo murmur -</p>

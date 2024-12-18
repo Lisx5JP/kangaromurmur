@@ -29,6 +29,7 @@ body {
 
 h1 {
   margin-bottom: 32px;
+  font-family: 'Consolas', monospace;
 }
 
 h2 {
@@ -182,10 +183,12 @@ table th {
 table thead th {
   vertical-align: middle;
   white-space: nowrap;
+  text-align: left !important;
 }
 
 table tbody td {
   vertical-align: top;
+  text-align: left !important;
 }
 
 table tbody tr:last-child td {

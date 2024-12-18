@@ -13,6 +13,15 @@
     body {
       /* max-width: 1280px; */
       background-color: darkgreen;
+      padding: 1.25rem;
+      padding-top: 1.75rem;
+      margin: 0;
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 1.25rem;
+      }
     }
 
     #images {
@@ -96,6 +105,11 @@
         trueOrder: true,
         margin: 12,
         columns: 13,
+        breakAt: {
+          800: 10,
+          600: 8,
+          500: 5
+        }
       });
     })
     .catch(error => console.error("Error loading images:", error));

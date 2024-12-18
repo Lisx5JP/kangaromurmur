@@ -7,28 +7,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/styles/post.css" rel="stylesheet">
   <style>
-    #app {
-      margin-bottom: 8rem;
-      max-width: 1180px;
+    body {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      margin: 0 auto;
+      max-width: 1280px;
     }
 
-    .btns {
-      button {
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        padding: 0.125rem 0.5rem;
-        border-radius: 4px;
-        border-color: transparent;
-      }
+    #app {
+      margin-bottom: 4rem;
+    }
+
+    .btns button {
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+      border-color: transparent;
+      border-width: 1px;
+      cursor: pointer;
+    }
+
+    .btns button:hover {
+      border-color: rebeccapurple !important;
     }
 
     .selected {
-      background-color: lightyellow;
+      border-color: rebeccapurple !important;
+    }
+
+    .back {
+      font-family: 'Consolas', monospace;
     }
 
     .murmur {
       position: absolute;
-      top: 0.5rem;
+      top: 1rem;
       right: 1rem;
       width: 100px;
       rotate: -15deg;
@@ -46,7 +60,9 @@
       < back</a>
   </p>
 
-  <img src="../assets/imgs/murmur.png" alt="kangaroo murmur" class="murmur" />
+  <a href="/index.html">
+    <img src="../assets/imgs/murmur.png" alt="kangaroo murmur" class="murmur" />
+  </a>
 
   <div id="app">
     <div class="btns">
@@ -55,14 +71,14 @@
     </div>
 
     <div class="btns" style="margin-top: 1rem;">
-      <span>筛选城市：</span>
+      <span>城市：</span>
       <button v-for="item in citiesList" :key="item" @click="setFilter('c', item)">
         {{ item }}
       </button>
     </div>
 
     <div class="btns" style="margin-top: 1rem;">
-      <span>筛选系列：</span>
+      <span>系列：</span>
       <button v-for="item in seriesList" :key="item" @click="setFilter('s', item)"
         :style="{ backgroundColor: getRandomColor() }">
         {{ item }}
@@ -102,7 +118,7 @@
 
   createApp({
     setup() {
-      const headers = ['日期 ⏲️', '场地 🚪', '演出 🎭', '永久链接 🔗'];
+      const headers = ['日期 📆', '场地 🚪', '演出 🎛️', '永久链接 🔗'];
       const data = ref([]);
       const seriesList = ref([]);
       const citiesList = ref([]);
