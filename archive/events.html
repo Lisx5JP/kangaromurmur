@@ -88,8 +88,8 @@
           <td>
             <a :href="item.link" target="_blank">{{ item.name }}</a>
           </td>
-          <td v-if="item.permalink" style="font-family: 'Consolas', monospace;">
-            <a :href="item.permalink" target="_blank">Permalink ⤴</a>
+          <td v-if="item.permalink" style="font-family: 'Consolas', monospace; white-space: nowrap;">
+            <a :href="item.permalink" target="_blank">Permalink⤴</a>
           </td>
         </tr>
       </tbody>
