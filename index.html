@@ -17,6 +17,10 @@
       font-family: 'Consolas', monospace;
     }
 
+    #murmur {
+      width: 280px;
+    }
+
     h1 {
       margin-top: 0;
       padding-top: 0;
@@ -46,11 +50,30 @@
     a:visited {
       color: #6a7b8d;
     }
+
+    .footer {
+      position: absolute;
+      bottom: 1.5rem;
+      opacity: 0.8;
+      line-height: 1;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    @media screen and (max-width: 600px) {
+      #murmur {
+        width: 200px;
+      }
+
+      ul li {
+        display: block;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <img src="/assets/imgs/murmur.png" width="280" />
+  <img id="murmur" src="/assets/imgs/murmur.png" />
 
   <ul>
     <li>[<a href="./archive/videos.html">videos archive</a>]</li>
@@ -58,7 +81,7 @@
     <li>[<a href="./archive/posters.html">posters archive</a>]</li>
   </ul>
 
-  <p style="position: absolute; bottom: 2rem; opacity: 0.8; font-size: 1rem;">- kangaroo murmur -</p>
+  <p class="footer">- kangaroo murmur -</p>
 </body>
 
 </html>

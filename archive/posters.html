@@ -22,8 +22,9 @@
 </body>
 
 <script>
-  const imageFolder = "../assets/imgs/poster/";
-  const thumbFolder = "../assets/imgs/poster/thumb/";
+  const baseUrl = "https://cdn.jsdelivr.net/gh/lisx5JP/kangaroomurmur@main";
+  const imageFolder = `${baseUrl}/assets/imgs/poster/`;
+  const thumbFolder = `${baseUrl}/assets/imgs/poster/thumb/`;
 
   // Fetch image data from the external JSON file
   fetch('./posters.json')
